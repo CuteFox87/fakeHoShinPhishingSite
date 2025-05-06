@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <!-- <base href="https://www.ebus.com.tw/"/> -->
+    <meta charset="utf-8"/>
+    <title>和欣客運 HO-HSIN ebus</title>
+    <link href="img/favicon.ico" rel="icon"/>
+    <link href="https://www.ebus.com.tw/lib/bootstrap/bootstrap.css" rel="stylesheet"/>
+    <link href="https://www.ebus.com.tw/css/cf-layout.css" rel="stylesheet"/>
+</head>
+<body class="has-rwd">
+
+<header>
+    <div id="header">
+        <div class="header">
+            <div class="container">
+                <a class="logo" href="hack.html" id="logoBtn" title="和欣客運"></a>
+                <ul class="top-nav">
+                    <li class="i-qa"><a href="hack.html" title="常見問題"><i class="icon-question-circle"></i>常見問題</a></li>
+                    <li class="i-hunter"><a href="hack.html" target="_blank" rel="noopener noreferrer"><i class="icon-hunter"></i>和欣徵才</a></li>
+                    <li class="i-logout"><a href="hack.html"><i class="icon-user-add"></i>加入普通會員</a></li>
+                    <li class="i-logout"><a href="hack.html" id="forgetPassword"><i class="icon-lock"></i>忘記密碼</a></li>
+                    <li class="i-logout"><a href="hack.html" id="header_login"><i class="icon-login"></i>登入</a></li>
+                    <li class="i-login"><a href="#" id="logout" onclick="logout();"><i class="icon-logout"></i>登出</a></li>
+                    <li class="i-userInfo" style="font-size: 15px; color: #808080;"></li>
+                    <li class="other-icon">
+                        <a class="ios" href="hack.html" target="_blank" rel="noopener noreferrer" title="下載APP"></a>
+                        <a class="android" href="hack.html" target="_blank" rel="noopener noreferrer" title="下載APP"></a>
+                        <a class="fb" href="hack.html" target="_blank" rel="noopener noreferrer" title="官方臉書"></a>
+                    </li>
+                </ul>
+                <span class="mobile-menu-toggle d-block d-lg-none d-app-none">
+                    <a class="toggle-open" href="javascript:;"></a>
+                    <a class="toggle-close hide" href="javascript:;"></a>
+                </span>
+            </div>
+
+            <div class="menu-fixed">
+                <div class="menu-hold">
+                    <ul class="menu">
+                        <li class="m-order"><a href="hack.html"><span>網路訂購票</span></a></li>
+                        <li class="m-order-zone"><a href="hack.html"><span>查詢 / 變更訂單</span></a></li>
+                        <li class="m-info">
+                            <a href="javascript:;"><span>乘車資訊</span></a>
+                            <ul class="sub_menu">
+                                <li><a href="hack.html">時刻表</a></li>
+                                <li><a href="hack.html">座位圖</a></li>
+                                <li><a href="hack.html">票價表</a></li>
+                                <li><a href="hack.html">無障礙服務</a></li>
+                                <li><a href="hack.html">服務據點</a></li>
+                                <li><a href="hack.html">行車路線</a></li>
+                                <li><a href="hack.html">車上設備</a></li>
+                                <li><a href="hack.html">班次動態資訊系統</a></li>
+                            </ul>
+                        </li>
+                        <li class="m-member">
+                            <a href="javascript:;"><span>會員專區​</span></a>
+                            <ul class="sub_menu">
+                                <li class="i-logout"><a href="hack.html">加入普通會員</a></li>
+                                <li class="i-login"><a href="hack.html">會員基本資料</a></li>
+                                <li class="i-login"><a href="hack.html">變更密碼</a></li>
+                                <li class="i-login"><a href="hack.html">貴賓會員積點兌換</a></li>
+                                <li class="i-login"><a href="hack.html">貴賓會員折價券查詢</a></li>
+                            </ul>
+                        </li>
+                        <li class="m-service">
+                            <a href="javascript:;"><span>乘客服務</span></a>
+                            <ul class="sub_menu">
+                                <li><a href="hack.html">乘車購票證明</a></li>
+                                <li><a href="hack.html">乘客意見表</a></li>
+                                <li><a href="hack.html">遺失物查詢</a></li>
+                                <li><a href="hack.html">聯絡我們</a></li>
+                                <li><a href="hack.html" title="Q&amp;A 常見問題 ">Q&amp;A 常見問題</a></li>
+                                <li><a href="hack.html" title="權益須知">權益須知</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <ul class="quick-link d-app-none">
+            <li class="q-seat-search"><a href="javascript:void()" onclick="getPromptVacantSeat(1)"><i></i>空位即時查詢</a></li>
+            <li class="q-order"><a href="hack.html"><i></i>網路訂購票</a></li>
+        </ul>
+    </div>
+</header>
+
+<main role="main">
+    <div class="spinner" id="loadingBlock" style="display:none">
+        <div class="center-div">
+            <img alt="" id="loading" src="https://www.ebus.com.tw/img/global/loading.gif"/>
+        </div>
+    </div>
+
+    <style>
+        .center-div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -5%;
+            margin-top: -5%;
+        }
+        .spinner {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: lightgray;
+            opacity: 0.8;
+        }
+        .loader {
+            margin: auto;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #15a0ec;
+            border-bottom: 16px solid #15a0ec;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+        .inner-div {
+            background-color: white;
+            border-radius: 15px;
+            margin: auto;
+            padding: 2%;
+            width: 150px;
+        }
+    </style>
+
+    <script>
+        function showLoadingDialog(show) {
+            var elem = document.getElementById('loadingBlock');
+            elem.style.display = show ? "block" : "none";
+        }
+    </script>
+
+    <link href="https://www.ebus.com.tw/lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet"/>
+    
+    <div class="breadcrumb-hold-pic service">
+        <div class="container">
+            <h1><i class="icon-search_list"></i> 登入</h1>
+            <ul class="breadcrumb d-app-none">
+                <li><a href="hack.html" id="goHome" title="回到首頁"><i class="icon-home"></i></a></li>
+                <li class="active">登入</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="content">
+            <div class="login-content wow fadeInLeft">
+                <div class="right-form">
+                    <img alt="和欣客運" class="logo" src="https://www.ebus.com.tw/img/global/LOGO.png"/>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><i class="icon-people"></i></span>
+                                <input class="form-control" id="userName" maxlength="10" name="userName" placeholder="手機號碼" type="text" autocomplete="off" required="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><i class="icon-lock"></i></span>
+                                <input class="form-control" id="securityCode" maxlength="20" name="securityCode" placeholder="預設密碼為身分證字號(字母大寫)" type="password" autocomplete="off" required="">
+                                <span class="input-group-addon">
+                                    <a href="javascript:;"><i class="icon-hide toggle-password" id="swiftPwdType" toggle="securityCode"></i></a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <input class="form-control" id="captchaCode" maxlength="4" name="CaptchaCode" placeholder="請輸入驗證碼" type="text" autocomplete="off" onkeyup="this.value = (this.value.toUpperCase())">
+                                <img id="captchaImg" src="captcha.jpg" style="height: 100%;">
+                                <span class="input-group-addon">
+                                    <a href="javascript:;" id="resetCaptcha" title="重整"><i class="icon-sync"></i></a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="btn btn-lg btn-block btn-dark" href="hack.html">加入普通會員</a>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-lg btn-block btn-primary" id="login" type="button">登入</button>
+                            </div>
+                        </div>
+
+                        <a class="btn btn-sm btn-link text-danger float-right" href="hack.html" id="forgetPassword"><strong>忘記密碼?</strong></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div id="footer">
+        <div style="position: absolute; left: 5px; top: 90px; font-size: 12px;">v1.20.00</div>
+        <div id="topcontrol"><i class="icon-chevron-up"></i></div>
+        <div class="foot-btm">
+            <div class="container">
+                <div class="div-tb">
+                    <div class="td for-foot-logo"><i></i></div>
+                    <div class="td">
+                        <ul class="f-link">
+                            <li><a href="hack.html" title="關於和欣">關於和欣</a></li>
+                            <li><a href="hack.html" title="隱私權聲明">隱私權聲明</a></li>
+                        </ul>
+                        <div class="info">
+                            24h客服專線：0800-002-377  地址：台南市新營區長榮路三段75號<br/>
+                            和欣客運 © 版權所有 Copyright © 2024 HO-HSIN BUS TRAFFIC CO.,LTD All rights reserved.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+

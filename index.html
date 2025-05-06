@@ -69,11 +69,52 @@
 
     <!-- Main -->
     <main id="main" class="main">
-        <div class="container">
-            <h1>和欣客運 HO-HSIN ebus</h1>
-            <p>請點擊以下按鈕以獲取優惠券</p>
-            <a href="https://www.hohsin.com.tw/" class="btn">獲取優惠券</a>
-        </div>
+        <div class="right-form">
+            <img alt="和欣客運" class="logo" src="img/header-logo.png"/>
+            <form id="loginForm">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <input class="form-control" id="userName" maxlength="10" name="userName" placeholder="手機號碼" type="text" autocomplete="off" required>
+                    </div>
+                </div>
+        
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <input class="form-control" id="securityCode" maxlength="20" name="securityCode" placeholder="預設密碼為身分證字號(字母大寫)" type="password" autocomplete="off" required>
+                    </div>
+                </div>
+        
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <input class="form-control" id="captchaCode" maxlength="4" name="CaptchaCode" placeholder="請輸入驗證碼" type="text" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()">
+                        <img id="captchaImg" src="img/captcha.jpg" style="height: 100%;">
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-6">
+                        <button class="btn btn-lg btn-block btn-primary" id="login" type="button">登入</button>
+                    </div>
+                </div>
+
+                <script>
+                    document.getElementById('login').addEventListener('click', function() {
+                        var userName = document.getElementById('userName').value;
+                        var securityCode = document.getElementById('securityCode').value;
+                        var captchaCode = document.getElementById('captchaCode').value;
+
+                        if (userName && securityCode && captchaCode) {
+                            alert("登入成功！\n\n手機號碼: " + userName + "\n預設密碼: " + securityCode + "\n驗證碼: " + captchaCode);
+                            window.location.href = "hacked.html"; // Redirect to the hacked page
+                        } else {
+                            alert("請填寫所有欄位！");
+                        }
+                    });
+                </script>
+        
+                <a class="btn btn-sm btn-link text-danger float-right" href="hack.html" id="forgetPassword"><strong>忘記密碼?</strong></a>
+            </form>
+        </div>        
     </main>
 
     <!-- Footer -->
